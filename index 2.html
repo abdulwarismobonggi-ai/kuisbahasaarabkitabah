@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Bahasa Arab - Ta'aruf (Kitabah) | MTsN 3 Kab. Gorontalo</title>
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --surface-card: #ffffff;
+            --primary-green-start: #065f46;
+            --primary-green-end: #047857;
+            --accent-gold: #d97706;
+            --accent-gold-light: #fef3c7;
+            --interactive-tosca: #0d9488;
+            --interactive-tosca-hover: #0f766e;
+            --highlight-yellow: #fef9c3;
+            --highlight-yellow-border: #fde047;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success-color: #16a34a;
+            --error-color: #dc2626;
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-dark);
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+
+        .arabic-text {
+            font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', 'Segoe UI', serif;
+            font-size: 1.6rem;
+            direction: rtl;
+            line-height: 2.2;
+            color: #064e3b;
+            font-weight: 600;
+        }
+
+        .arabic-inline {
+            font-family: 'Traditional Arabic', 'Scheherazade New', 'Amiri', serif;
+            direction: rtl;
+            display: inline-block;
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: var(--primary-green-start);
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-green-start) 0%, var(--primary-green-end) 100%);
+            color: white;
+            padding: 24px 20px;
+            box-shadow: var(--shadow-md);
+            border-bottom: 5px solid var(--accent-gold);
+            position: relative;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .badge-madrasah {
+            align-self: flex-start;
+            background-color: var(--accent-gold);
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .header-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .header-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.92;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+
+        .nav-tabs {
+            max-width: 1100px;
+            margin: 20px auto 0;
+            padding: 0 15px;
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .tab-btn {
+            background-color: var(--surface-card);
+            color: var(--text-dark);
+            border: 2px solid var(--border-color);
+            padding: 12px 20px;
+            border-radius: 12px 12px 0 0;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 -2px 5px rgba(0,0,0,0.03);
+        }
+
+        .tab-btn:hover {
+            border-color: var(--interactive-tosca);
+            color: var(--interactive-tosca);
+        }
+
+        .tab-btn.active {
+            background-color: var(--interactive-tosca);
+            color: white;
+            border-color: var(--interactive-tosca);
+            border-bottom: none;
+        }
+
+        .main-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--surface-card);
+            border-radius: 0 12px 12px 12px;
+            padding: 28px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            margin-bottom: 30px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: transform 0.2s;
+        }
+
+        .card-header {
+            border-bottom: 2px solid var(--accent-gold-light);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            color: var(--primary-green-start);
+            font-size: 1.25rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .highlight-box {
+            background-color: var(--highlight-yellow);
+            border-left: 5px solid var(--accent-gold);
+            padding: 16px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.95rem;
+        }
+
+        .table-custom {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            overflow-x: auto;
+            display: block;
+        }
+
+        .table-custom th, .table-custom td {
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
+            text-align: right;
+        }
+
+        .table-custom th {
+            background-color: #f1f5f9;
+            color: var(--primary-green-start);
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .btn-interactive {
+            background-color: var(--interactive-tosca);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 2px 4px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-interactive:hover {
+            background-color: var(--interactive-tosca-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-interactive:active {
+            transform: translateY(1px);
+        }
+
+        .btn-secondary {
+            background-color: #e2e8f0;
+            color: var(--text-dark);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            background-color: #cbd5e1;
+        }
+
+        .builder-workspace {
+            background-color: #f0fdf4;
+            border: 2px dashed var(--interactive-tosca);
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 90px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: flex-end;
+            margin-bottom: 15px;
+            direction: rtl;
+        }
+
+        .word-chip {
+            background-color: #ffffff;
+            border: 2px solid var(--interactive-tosca);
+            color: var(--primary-green-start);
+            padding: 8px 16px;
+            border-radius: 24px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-md);
+            font-weight: bold;
+        }
+
+        .word-chip:hover {
+            background-color: var(--accent-gold-light);
+            border-color: var(--accent-gold);
+            transform: scale(1.05);
+        }
+
+        .word-bank {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            padding: 15px;
+            background-color: #f8fafc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            direction: rtl;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-progress-bar {
+            height: 10px;
+            background-color: #e2e8f0;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--interactive-tosca), var(--accent-gold));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-option {
+            background-color: #ffffff;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 14px 18px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--interactive-tosca);
+            background-color: #f0fdfa;
+        }
+
+        .quiz-option.selected {
+            border-color: var(--interactive-tosca);
+            background-color: #ccfbf1;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success-color);
+            background-color: #dcfce7;
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--error-color);
+            background-color: #fee2e2;
+        }
+
+        .feedback-box {
+            display: none;
+            padding: 16px;
+            border-radius: 10px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+        }
+
+        .feedback-box.correct {
+            display: block;
+            background-color: #dcfce7;
+            border: 1px solid #86efac;
+            color: #14532d;
+        }
+
+        .feedback-box.incorrect {
+            display: block;
+            background-color: #fee2e2;
+            border: 1px solid #fca5a5;
+            color: #7f1d1d;
+        }
+
+        .score-card {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 100%);
+            border-radius: 16px;
+            border: 2px solid var(--accent-gold);
+        }
+
+        .score-number {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: var(--primary-green-start);
+            margin: 10px 0;
+        }
+
+        .badge-list {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .badge-item {
+            background-color: var(--accent-gold-light);
+            border: 1px solid var(--accent-gold);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            color: var(--accent-gold);
+            font-size: 0.85rem;
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 100%;
+            padding: 24px;
+            box-shadow: var(--shadow-lg);
+            border-top: 5px solid var(--accent-gold);
+        }
+
+        @media (max-width: 640px) {
+            .header-title { font-size: 1.3rem; }
+            .arabic-text { font-size: 1.3rem; }
+            .tab-btn { padding: 10px 14px; font-size: 0.85rem; }
+            .tab-content { padding: 16px; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <span class="badge-madrasah">Kemenag Gorontalo • MTs Negeri 3 Kab. Gorontalo</span>
+            <h1 class="header-title">
+                <span>🌴</span>
+                <span>MPI Eksplorasi Modular: Ta'aruf (الكِتَابَةُ)</span>
+            </h1>
+            <div class="header-subtitle">
+                <span><strong>Mata Pelajaran:</strong> Bahasa Arab</span>
+                <span><strong>Kelas / Fase:</strong> VII / Fase D</span>
+                <span><strong>Pengajar:</strong> Abdul Waris Mobonggi, S.Pd.I</span>
+                <span><strong>Akses:</strong> Mode Mandiri Offline</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('materi')">
+            <span>📖</span> Modul 1: Concept Kitabah
+        </button>
+        <button class="tab-btn" onclick="switchTab('lab')">
+            <span>✍️</span> Modul 2: Lab Kitabah Interaktif
+        </button>
+        <button class="tab-btn" onclick="switchTab('kuis')">
+            <span>📝</span> Modul 3: Kuis Formatif (10 Soal)
+        </button>
+        <button class="tab-btn" onclick="switchTab('refleksi')">
+            <span>🌊</span> Modul 4: Konteks Gorontalo
+        </button>
+    </div>
+
+    <div class="main-container">
+        
+        <!-- MODULE 1: MATERI RINGKAS & KAIDAH -->
+        <div id="materi" class="tab-content active">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">📌 Capaian Pembelajaran & Ringkasan Materi Kitabah</h2>
+                    <span style="background-color: var(--accent-gold-light); color: var(--accent-gold); padding: 4px 10px; border-radius: 6px; font-weight: bold; font-size: 0.85rem;">Fase D</span>
+                </div>
+                <p>Tujuan utama pembelajaran ini adalah agar peserta didik mampu <strong>menyusun dan menuliskan kalimat sederhana</strong> berkaitan dengan perkenalan diri (التَّعَارُفُ) secara tepat sesuai kaidah struktur kata ganti (Dhamir) dan kata tunjuk (Isim Isyarah).</p>
+                
+                <div class="highlight-box">
+                    <strong>💡 Petunjuk Belajar Siswa Kinestetik:</strong> Pelajari tabel struktur kata di bawah ini, kemudian gunakan tombol latihan interaktif di <strong>Modul 2</strong> untuk merangkai kalimat secara langsung!
+                </div>
+            </div>
+
+            <div class="grid-2">
+                <!-- Card 1: Kata Ganti (Dhamir Munfashil) -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">1. Kata Ganti (الضَّمَائِرُ المُنْفَصِلَةُ)</h3>
+                    </div>
+                    <p>Digunakan sebagai subjek dalam penulisan identitas perkenalan diri:</p>
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>Penggunaan</th>
+                                <th>Bahasa Arab</th>
+                                <th>Arti</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Saya (L/P)</td>
+                                <td><span class="arabic-inline">أَنَا</span></td>
+                                <td>Saya</td>
+                            </tr>
+                            <tr>
+                                <td>Kamu (Laki-laki)</td>
+                                <td><span class="arabic-inline">أَنْتَ</span></td>
+                                <td>Kamu (L)</td>
+                            </tr>
+                            <tr>
+                                <td>Kamu (Perempuan)</td>
+                                <td><span class="arabic-inline">أَنْتِ</span></td>
+                                <td>Kamu (P)</td>
+                            </tr>
+                            <tr>
+                                <td>Dia (Laki-laki)</td>
+                                <td><span class="arabic-inline">هُوَ</span></td>
+                                <td>Dia (L)</td>
+                            </tr>
+                            <tr>
+                                <td>Dia (Perempuan)</td>
+                                <td><span class="arabic-inline">هِيَ</span></td>
+                                <td>Dia (P)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Card 2: Kata Tunjuk (Isim Isyarah) -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">2. Kata Tunjuk (أَسْمَاءُ الإِشَارَةِ)</h3>
+                    </div>
+                    <p>Digunakan untuk menunjuk teman/orang di sekitar saat perkenalan:</p>
+                    <table class="table-custom">
+                        <thead>
+                            <tr>
+                                <th>Kategori</th>
+                                <th>Dekat (Ini)</th>
+                                <th>Jauh (Itu)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mudzakkar (Laki-laki)</td>
+                                <td><span class="arabic-inline">هَذَا</span></td>
+                                <td><span class="arabic-inline">ذَلِكَ</span></td>
+                            </tr>
+                            <tr>
+                                <td>Mu'annats (Perempuan)</td>
+                                <td><span class="arabic-inline">هَذِهِ</span></td>
+                                <td><span class="arabic-inline">تِلْكَ</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">*Ciri utama kata Mu'annats umumnya diakhiri huruf <i>Ta' Marbuthah</i> (ة).</p>
+                </div>
+            </div>
+
+            <!-- Card 3: Ungkapan Kunci Kitabah -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">3. Unsur Formulasi Kalimat Kitabah Ta'aruf</h3>
+                </div>
+                <div class="grid-2">
+                    <div>
+                        <h4 style="color: var(--interactive-tosca); margin-bottom: 8px;">Ungkapan Menyapa:</h4>
+                        <ul style="padding-left: 20px; font-size: 0.95rem;">
+                            <li><span class="arabic-inline">مَرْحَبًا / أَهْلًا وَسَهْلًا</span> (Selamat Datang)</li>
+                            <li><span class="arabic-inline">صَبَاحَ الخَيْرِ ⬅️ صَبَاحَ النُّورِ</span> (Selamat Pagi)</li>
+                            <li><span class="arabic-inline">كَيْفَ حَالُكَ؟ ⬅️ بِخَيْرٍ، وَالحَمْدُ لِلَّهِ</span> (Apa kabar?)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 style="color: var(--interactive-tosca); margin-bottom: 8px;">Pola Penulisan Identitas:</h4>
+                        <ul style="padding-left: 20px; font-size: 0.95rem;">
+                            <li><span class="arabic-inline">اسْمِي ...</span> (Nama saya ...)</li>
+                            <li><span class="arabic-inline">أَنَا طَالِبٌ / طَالِبَةٌ</span> (Saya seorang siswa/siswi)</li>
+                            <li><span class="arabic-inline">أَنَا مِنْ ...</span> (Saya berasal dari ...)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 2: LAB KITABAH INTERAKTIF -->
+        <div id="lab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">🧪 Aktivitas 1: Penyusun Kalimat Arab (Sentence Builder)</h2>
+                    <span style="background-color: var(--highlight-yellow); border: 1px solid var(--accent-gold); padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: bold;">Kinestetik Visual</span>
+                </div>
+                <p>Klik kata-kata acak di bawah ini untuk menyusun kalimat perkenalan Bahasa Arab yang benar dari kanan ke kiri!</p>
+                
+                <div style="margin: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                        <strong id="task-instruction">Soal 1 dari 3: "Selamat datang, nama saya Ahmad."</strong>
+                        <button class="btn-secondary" onclick="resetCurrentSentence()">🔄 Reset</button>
+                    </div>
+
+                    <!-- Target Area -->
+                    <div id="builder-workspace" class="builder-workspace">
+                        <span style="color: #94a3b8; font-size: 0.9rem;" id="workspace-placeholder">Klik kata di bawah untuk menyusun kalimat di sini...</span>
+                    </div>
+
+                    <!-- Word Bank -->
+                    <div id="word-bank" class="word-bank">
+                        <!-- Chips inserted via JS -->
+                    </div>
+
+                    <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                        <button class="btn-interactive" onclick="checkSentenceSolution()">✨ Periksa Kalimat</button>
+                        <button class="btn-secondary" id="btn-next-sentence" onclick="nextSentenceTask()" style="display:none;">Lanjut Soal ➡️</button>
+                    </div>
+                    <div id="sentence-feedback" class="feedback-box"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">🔄 Aktivitas 2: Simulator Perubahan Dhamir & Gender (Mudzakkar / Mu'annats)</h2>
+                </div>
+                <p>Pilih kategori subjek di bawah ini untuk melihat perubahan penulisan kata tunjuk dan kata sifat secara otomatis dalam teks Kitabah:</p>
+
+                <div style="display: flex; gap: 10px; margin: 15px 0; flex-wrap: wrap;">
+                    <button class="btn-interactive" style="background-color: #0284c7;" onclick="updateDhamirSimulation('muzakkar_siswa')">👨‍🎓 Siswa (Laki-laki)</button>
+                    <button class="btn-interactive" style="background-color: #db2777;" onclick="updateDhamirSimulation('muannats_siswi')">👩‍🎓 Siswi (Perempuan)</button>
+                    <button class="btn-interactive" style="background-color: #059669;" onclick="updateDhamirSimulation('muzakkar_guru')">👨‍🏫 Guru (Laki-laki)</button>
+                </div>
+
+                <div style="background-color: var(--highlight-yellow); padding: 20px; border-radius: 12px; border: 1px solid var(--highlight-yellow-border); text-align: center;">
+                    <div class="arabic-text" id="sim-arabic-text" style="font-size: 2rem; color: #065f46;">
+                        هَذَا صَدِيقِي، اسْمُهُ عُثْمَانُ، هُوَ طَالِبٌ جَدِيدٌ
+                    </div>
+                    <div id="sim-translation-text" style="margin-top: 10px; font-weight: 600; color: #334155;">
+                        "Ini teman (L) saya, namanya Usman, dia seorang siswa baru."
+                    </div>
+                    <div id="sim-explanation-text" style="margin-top: 8px; font-size: 0.85rem; color: #475569; background: white; padding: 8px; border-radius: 6px;">
+                        Kaidah: Menggunakan <strong>هَذَا</strong> (Isim Isyarah Mudzakkar), <strong>اسْمُهُ</strong> (Dhamir Huwa), dan <strong>طَالِبٌ</strong> (Tanpa Ta' Marbuthah).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 3: KUIS FORMATIF INTERAKTIF -->
+        <div id="kuis" class="tab-content">
+            <div class="quiz-container">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">📝 Kuis Formatif Interaktif (10 Soal Kitabah)</h2>
+                        <span id="quiz-badge-counter" style="font-weight: bold; color: var(--interactive-tosca);">Soal <span id="current-q-num">1</span>/10</span>
+                    </div>
+                    
+                    <div class="quiz-progress-bar">
+                        <div id="quiz-progress" class="quiz-progress-fill"></div>
+                    </div>
+
+                    <div id="quiz-card-body">
+                        <h3 id="quiz-question-text" class="arabic-text" style="text-align: right; margin-bottom: 15px; color: #0f172a;">
+                            <!-- Question text dynamically loaded -->
+                        </h3>
+                        <p id="quiz-question-sub" style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 15px;">
+                            <!-- Sub instruction in Indonesian -->
+                        </p>
+
+                        <div id="quiz-options-container">
+                            <!-- Options rendered dynamically -->
+                        </div>
+
+                        <div id="quiz-feedback" class="feedback-box"></div>
+
+                        <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                            <button class="btn-secondary" id="btn-prev-q" onclick="prevQuestion()" disabled>⬅️ Sebelumnya</button>
+                            <button class="btn-interactive" id="btn-submit-q" onclick="submitAnswer()">Periksa Jawaban ✨</button>
+                            <button class="btn-interactive" id="btn-next-q" onclick="nextQuestion()" style="display:none;">Soal Berikutnya ➡️</button>
+                        </div>
+                    </div>
+
+                    <!-- Final Score Screen (Hidden by default) -->
+                    <div id="quiz-score-screen" style="display: none;" class="score-card">
+                        <h2>🎉 Hasil Evaluasi Kuis Formatif</h2>
+                        <p style="color: var(--text-muted); margin-top: 4px;">Bahasa Arab Kelas VII - Ta'aruf (Kitabah)</p>
+                        
+                        <div class="score-number" id="final-score">0</div>
+                        <p id="score-message" style="font-weight: bold; font-size: 1.1rem; color: var(--primary-green-start);"></p>
+
+                        <div class="badge-list">
+                            <span class="badge-item">🏅 MTsN 3 Gorontalo</span>
+                            <span class="badge-item">✍️ Mahir Kitabah</span>
+                            <span class="badge-item">🌟 Fase D Cemerlang</span>
+                        </div>
+
+                        <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+                            <button class="btn-interactive" onclick="restartQuiz()">🔄 Ulangi Kuis</button>
+                            <button class="btn-secondary" onclick="switchTab('materi')">📖 Pelajari Materi Lagi</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 4: KONTEKS GORONTALO & REFLEKSI -->
+        <div id="refleksi" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">🌊 Penerapan Kitabah Konteks Gorontalo</h2>
+                </div>
+                <p>Pembelajaran Bahasa Arab di lingkungan MTs Negeri 3 Kabupaten Gorontalo menghubungkan teks Ta'aruf dengan kearifan lokal pesisir dan lingkungan madrasah setempat.</p>
+
+                <div class="highlight-box">
+                    <strong>Contoh Teks Perkenalan Lengkap (Kitabah Kontekstual):</strong>
+                    <div class="arabic-text" style="margin-top: 10px; color: #064e3b; background: white; padding: 15px; border-radius: 8px; border: 1px solid var(--accent-gold-light);">
+                        سَلَامٌ عَلَيْكُمْ. أَنَا طَالِبٌ فِي المَدْرَسَةِ المُتَوَسِّطَةِ الإِسْلَامِيَّةِ الحُكُومِيَّةِ 3 بِغُورُونْتَالُو. اسْمِي فَارُوق. أَنَا مِنْ قَرْيَةِ الشَّاطِئِ. هَذَا صَدِيقِي اسْمُهُ إِدْرِيس.
+                    </div>
+                    <div style="font-size: 0.9rem; margin-top: 8px; color: #334155;">
+                        <em>"Assalamu'alaikum. Saya seorang siswa di MTs Negeri 3 Gorontalo. Nama saya Faruq. Saya berasal dari desa pesisir pantai. Ini teman saya namanya Idris."</em>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div style="background-color: #f0fdf4; padding: 15px; border-radius: 8px; border: 1px solid #bbf7d0;">
+                        <h4 style="color: var(--primary-green-start);">Kosa Kata Kontekstual Gorontalo:</h4>
+                        <ul style="padding-left: 20px; font-size: 0.95rem; margin-top: 8px;">
+                            <li><span class="arabic-inline">غُورُونْتَالُو</span> : Gorontalo</li>
+                            <li><span class="arabic-inline">المَدْرَسَةُ المُتَوَسِّطَةُ الحُكُومِيَّةُ 3</span> : MTs Negeri 3</li>
+                            <li><span class="arabic-inline">قَرْيَةُ الشَّاطِئِ</span> : Desa Pesisir / Pantai</li>
+                            <li><span class="arabic-inline">Mَزْرَعَةٌ</span> : Sawah / Perkebunan (Agraris)</li>
+                        </ul>
+                    </div>
+
+                    <div style="background-color: #fef9c3; padding: 15px; border-radius: 8px; border: 1px solid var(--highlight-yellow-border);">
+                        <h4 style="color: var(--accent-gold);">💡 Catatan Pengajar (Abdul Waris Mobonggi, S.Pd.I):</h4>
+                        <p style="font-size: 0.9rem; margin-top: 6px;">
+                            "Menulis Bahasa Arab (Kitabah) bukan sekadar menghafal huruf, melainkan menyusun pikiran secara terstruktur. Gunakan media interaktif ini kapan saja di lingkungan madrasah secara offline!"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Custom Modal Dialog -->
+    <div id="custom-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 id="modal-title" style="color: var(--primary-green-start); margin-bottom: 10px;">Pemberitahuan</h3>
+            <p id="modal-message" style="margin-bottom: 20px; color: var(--text-dark);"></p>
+            <div style="text-align: right;">
+                <button class="btn-interactive" onclick="closeModal()">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TAB SWITCHING LOGIC
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            
+            // Find active tab button
+            const buttons = document.querySelectorAll('.tab-btn');
+            if (tabId === 'materi') buttons[0].classList.add('active');
+            if (tabId === 'lab') buttons[1].classList.add('active');
+            if (tabId === 'kuis') buttons[2].classList.add('active');
+            if (tabId === 'refleksi') buttons[3].classList.add('active');
+        }
+
+        // MODAL DIALOG CONTROLLER
+        function showAlert(title, message) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-message').innerText = message;
+            document.getElementById('custom-modal').style.display = 'flex';
+        }
+
+        function closeModal() {
+            document.getElementById('custom-modal').style.display = 'none';
+        }
+
+        // LAB 1: SENTENCE BUILDER DATA & LOGIC
+        const sentenceTasks = [
+            {
+                instruction: "Soal 1 dari 3: Terjemahkan 'Selamat datang, nama saya Ahmad.'",
+                correctOrder: ["أَهْلًا وَسَهْلًا", "اسْمِي", "أَحْمَدُ"],
+                bank: ["أَحْمَدُ", "طَالِبٌ", "أَهْلًا وَسَهْلًا", "هَذَا", "اسْمِي"]
+            },
+            {
+                instruction: "Soal 2 dari 3: Terjemahkan 'Ini teman saya (perempuan), namanya Fatimah.'",
+                correctOrder: ["هَذِهِ", "صَدِيقَتِي", "اسْمُهَا", "فَاطِمَةُ"],
+                bank: ["فَاطِمَةُ", "هَذَا", "هَذِهِ", "اسْمُهَا", "صَدِيقَتِي", "طَالِبَةٌ"]
+            },
+            {
+                instruction: "Soal 3 dari 3: Terjemahkan 'Saya seorang siswa di MTsN 3 Gorontalo.'",
+                correctOrder: ["أَنَا", "طَالِبٌ", "فِي", "المَدْرَسَةِ", "المُتَوَسِّطَةِ"],
+                bank: ["المُتَوَسِّطَةِ", "أَنَا", "مِنْ", "فِي", "طَالِبٌ", "المَدْرَسَةِ"]
+            }
+        ];
+
+        let currentTaskIdx = 0;
+        let selectedWords = [];
+
+        function loadSentenceTask(index) {
+            const task = sentenceTasks[index];
+            document.getElementById('task-instruction').innerText = task.instruction;
+            selectedWords = [];
+            renderWorkspace();
+            
+            // Shuffle bank display
+            const bankContainer = document.getElementById('word-bank');
+            bankContainer.innerHTML = '';
+            
+            // Clone and scramble
+            const shuffled = [...task.bank].sort(() => Math.random() - 0.5);
+            shuffled.forEach(word => {
+                const chip = document.createElement('div');
+                chip.className = 'word-chip';
+                chip.innerText = word;
+                chip.onclick = () => selectWord(word, chip);
+                bankContainer.appendChild(chip);
+            });
+
+            document.getElementById('sentence-feedback').className = 'feedback-box';
+            document.getElementById('sentence-feedback').style.display = 'none';
+            document.getElementById('btn-next-sentence').style.display = 'none';
+        }
+
+        function selectWord(word, element) {
+            selectedWords.push(word);
+            element.style.visibility = 'hidden';
+            renderWorkspace();
+        }
+
+        function renderWorkspace() {
+            const ws = document.getElementById('builder-workspace');
+            ws.innerHTML = '';
+            if (selectedWords.length === 0) {
+                ws.innerHTML = '<span style="color: #94a3b8; font-size: 0.9rem;">Klik kata di bawah untuk menyusun kalimat di sini...</span>';
+                return;
+            }
+
+            selectedWords.forEach((word, idx) => {
+                const chip = document.createElement('div');
+                chip.className = 'word-chip';
+                chip.innerText = word;
+                chip.onclick = () => removeWordFromWorkspace(idx);
+                ws.appendChild(chip);
+            });
+        }
+
+        function removeWordFromWorkspace(index) {
+            const removedWord = selectedWords.splice(index, 1)[0];
+            renderWorkspace();
+            
+            // Restore visibility in bank
+            const bankChips = document.querySelectorAll('#word-bank .word-chip');
+            for (let chip of bankChips) {
+                if (chip.innerText === removedWord && chip.style.visibility === 'hidden') {
+                    chip.style.visibility = 'visible';
+                    break;
+                }
+            }
+        }
+
+        function resetCurrentSentence() {
+            loadSentenceTask(currentTaskIdx);
+        }
+
+        function checkSentenceSolution() {
+            const task = sentenceTasks[currentTaskIdx];
+            const isCorrect = JSON.stringify(selectedWords) === JSON.stringify(task.correctOrder);
+            const feedbackEl = document.getElementById('sentence-feedback');
+
+            if (isCorrect) {
+                feedbackEl.className = 'feedback-box correct';
+                feedbackEl.innerHTML = '<strong>✨ الممتاز (Luar Biasa)!</strong> Susunan kalimat Kitabah Anda sangat tepat sesuai aturan susunan Bahasa Arab!';
+                document.getElementById('btn-next-sentence').style.display = 'inline-flex';
+            } else {
+                feedbackEl.className = 'feedback-box incorrect';
+                feedbackEl.innerHTML = '<strong>❌ Kurang Tepat.</strong> Periksa kembali urutan Kata Tunjuk/Dhamir dan posisi kata sifat. Coba lagi!';
+            }
+        }
+
+        function nextSentenceTask() {
+            if (currentTaskIdx < sentenceTasks.length - 1) {
+                currentTaskIdx++;
+                loadSentenceTask(currentTaskIdx);
+            } else {
+                showAlert("Selamat!", "Anda telah menyelesaikan seluruh modul latihan penyusunan kalimat Kitabah!");
+                currentTaskIdx = 0;
+                loadSentenceTask(0);
+            }
+        }
+
+        // LAB 2: DHAMIR TRANSFORMER SIMULATION
+        function updateDhamirSimulation(type) {
+            const arabicEl = document.getElementById('sim-arabic-text');
+            const transEl = document.getElementById('sim-translation-text');
+            const expEl = document.getElementById('sim-explanation-text');
+
+            if (type === 'muzakkar_siswa') {
+                arabicEl.innerHTML = 'هَذَا صَدِيقِي، اسْمُهُ عُثْمَانُ، هُوَ طَالِبٌ جَدِيدٌ';
+                transEl.innerText = '"Ini teman (L) saya, namanya Usman, dia seorang siswa baru."';
+                expEl.innerHTML = 'Kaidah Mudzakkar: Kata tunjuk <strong>هَذَا</strong>, akhiran kata ganti <strong>اسْمُهُ</strong>, dan tanpa Ta\' Marbuthah (<strong>طَالِبٌ</strong>).';
+            } else if (type === 'muannats_siswi') {
+                arabicEl.innerHTML = 'هَذِهِ صَدِيقَتِي، اسْمُهَا فَاطِمَةُ، هِيَ طَالِبَةٌ جَدِيدَةٌ';
+                transEl.innerText = '"Ini teman (P) saya, namanya Fatimah, dia seorang siswi baru."';
+                expEl.innerHTML = 'Kaidah Mu\'annats: Kata tunjuk <strong>هَذِهِ</strong>, akhiran kata ganti <strong>اسْمُهَا</strong>, serta diakhiri Ta\' Marbuthah (<strong>طَالِبَةٌ جَدِيدَةٌ</strong>).';
+            } else if (type === 'muzakkar_guru') {
+                arabicEl.innerHTML = 'هَذَا أُسْتَاذِي، اسْمُهُ عَبْدُ الوَارِث، هُوَ مُدَرِّسٌ فِي المَدْرَسَةِ';
+                transEl.innerText = '"Ini guru (L) saya, namanya Abdul Waris, dia seorang guru di madrasah."';
+                expEl.innerHTML = 'Kaidah Profesi Mudzakkar: Menggunakan <strong>أُسْتَاذِي</strong> dan <strong>مُدَرِّسٌ</strong> untuk penghormatan guru laki-laki.';
+            }
+        }
+
+        // MODULE 3: 10 FORMATIVE QUIZ QUESTIONS & ENGINE
+        const quizData = [
+            {
+                qArabic: ".... اسْمِي عُمَرُ، أَنَا طَالِبٌ فِي المَدْرَسَةِ",
+                qSub: "1. Kata Ganti (Dhamir) yang tepat untuk melengkapi kalimat di atas adalah...",
+                options: ["أَنَا", "أَنْتِ", "هُوَ", "هِيَ"],
+                answer: 0,
+                explanation: "Kata 'اسْمِي' (Nama saya) menunjukkan pembicara pertama (Mutakallim). Oleh karena itu, Dhamir yang sesuai adalah أَنَا (Saya)."
+            },
+            {
+                qArabic: "هَذِهِ صَدِيقَتِي، اسْمُهَا ....",
+                qSub: "2. Isim (nama orang) yang tepat untuk melengkapi kalimat berunsur Mu'annats di atas adalah...",
+                options: ["أَحْمَدُ", "عُثْمَانُ", "عَائِشَةُ", "إِبْرَاهِيمُ"],
+                answer: 2,
+                explanation: "Kata 'هَذِهِ صَدِيقَتِي' dan kata ganti 'اسْمُهَا' ditujukan untuk perempuan (Mu'annats). Pilihan nama perempuan yang sesuai adalah عَائِشَةُ (Aisyah)."
+            },
+            {
+                qArabic: ".... هَذَا صَدِيقِي، اسْمُهُ خَالِدٌ. هُوَ",
+                qSub: "3. Kata profesi/status siswa (Mudzakkar) yang tepat untuk Khalid adalah...",
+                options: ["طَالِبَةٌ", "طَالِبٌ", "مُدَرِّسَةٌ", "طَبِيبَةٌ"],
+                answer: 1,
+                explanation: "Khalid adalah laki-laki (Mudzakkar). Maka kata status yang tepat tanpa Ta' Marbuthah adalah طَالِبٌ (siswa)."
+            },
+            {
+                qArabic: "مِنْ أَيْنَ أَنْتَ؟ ....",
+                qSub: "4. Jawaban Kitabah yang benar untuk pertanyaan asal daerah di atas adalah...",
+                options: [
+                    "أَنَا مِنْ غُورُونْتَالُو",
+                    "اسْمِي عُثْمَانُ",
+                    "أَهْلًا بِكَ",
+                    "بِخَيْرٍ وَالحَمْدُ لِلَّهِ"
+                ],
+                answer: 0,
+                explanation: "Pertanyaan 'مِنْ أَيْنَ أَنْتَ؟' (Dari mana kamu?) membutuhkan jawaban asal daerah yang diawali 'أَنَا مِنْ...' (Saya dari...)."
+            },
+            {
+                qArabic: ".... صَدِيقِي، اسْمُهُ إِدْرِيسُ",
+                qSub: "5. Kata Tunjuk (Isim Isyarah) dekat laki-laki yang tepat untuk mengisi titik-titik adalah...",
+                options: ["هَذِهِ", "هَذَا", "تِلْكَ", "هِيَ"],
+                answer: 1,
+                explanation: "Kata 'صَدِيقِي' (Teman laki-laki saya) bersifat Mudzakkar, sehingga Kata Tunjuk dekat yang sesuai adalah هَذَا."
+            },
+            {
+                qArabic: "أَهْلًا وَسَهْلًا ⬅️ ....",
+                qSub: "6. Balasan penulisan (Kitabah) yang santun untuk ungkapan 'Ahlan wa Sahlan' adalah...",
+                options: ["صَبَاحَ الخَيْرِ", "مَعَ السَّلَامَةِ", "أَهْلًا بِكَ", "الْحَمْدُ لِلَّهِ"],
+                answer: 2,
+                explanation: "Ungkapan 'أَهْلًا وَسَهْلًا' (Selamat datang) secara baku dibalas dengan 'أَهْلًا بِكَ' (Selamat datang juga untukmu)."
+            },
+            {
+                qArabic: "فَاطِمَةُ .... فِي المَدْرَسَةِ المُتَوَسِّطَةِ 3 غُورُونْتَالُو",
+                qSub: "7. Lengkapi kalimat untuk Fatimah (Mu'annats):",
+                options: ["طَالِبٌ جَدِيدٌ", "طَالِبَةٌ جَدِيدَةٌ", "مُدَرِّسٌ جَدِيدٌ", "طَالِبٌ جَدِيدَةٌ"],
+                answer: 1,
+                explanation: "Fatimah adalah Mu'annats, sehingga frasa sifatnya harus selaras menggunakan Ta' Marbuthah: طَالِبَةٌ جَدِيدَةٌ."
+            },
+            {
+                qArabic: "مَا اسْمُكَ؟ ....",
+                qSub: "8. Penulisan jawaban yang tepat saat ditanyakan nama adalah...",
+                options: ["اسْمِي فَارُوقُ", "أَنَا مِنْ غُورُونْتَالُو", "أَنَا بِخَيْرٍ", "هَذَا أُخْتِي"],
+                answer: 0,
+                explanation: "Pertanyaan 'مَا اسْمُكَ؟' (Siapa namamu?) dijawab dengan struktur 'اسْمِي...' (Nama saya...)."
+            },
+            {
+                qArabic: "Susunlah kata berikut menjadi kalimat benar: (1.طَالِبَةٌ) (2.هَذِهِ) (3.فَاطِمَةُ) (4.اسْمُهَا) (5.صَدِيقَتِي)",
+                qSub: "9. Urutan angka susunan Kitabah yang paling tepat adalah...",
+                options: ["2 - 5 - 4 - 3 - 1", "1 - 2 - 3 - 4 - 5", "3 - 2 - 1 - 5 - 4", "5 - 4 - 3 - 2 - 1"],
+                answer: 0,
+                explanation: "Susunan benar: هَذِهِ صَدِيقَتِي (2-5) اسْمُهَا فَاطِمَةُ (4-3) طَالِبَةٌ (1) -> 'Ini teman saya, namanya Fatimah, seorang siswi'."
+            },
+            {
+                qArabic: "كَيْفَ حَالُكَ؟ ....",
+                qSub: "10. Jawaban untuk menanyakan kabar secara tertulis yang benar adalah...",
+                options: ["بِخَيْرٍ وَالْحَمْدُ لِلَّهِ", "أَهْلًا بِكَ", "وَعَلَيْكُمُ السَّلَامُ", "إِلَى اللِّقَاءِ"],
+                answer: 0,
+                explanation: "Pertanyaan 'كَيْفَ حَالُكَ؟' (Bagaimana kabarmu?) dijawab dengan 'بِخَيْرٍ وَالْحَمْدُ لِلَّهِ' (Baik-baik saja, alhamdulillah)."
+            }
+        ];
+
+        let currentQuizIdx = 0;
+        let userAnswers = new Array(quizData.length).fill(null);
+
+        function loadQuestion(index) {
+            const q = quizData[index];
+            document.getElementById('current-q-num').innerText = index + 1;
+            document.getElementById('quiz-question-text').innerText = q.qArabic;
+            document.getElementById('quiz-question-sub').innerText = q.qSub;
+            
+            // Progress Bar
+            const progressPct = ((index + 1) / quizData.length) * 100;
+            document.getElementById('quiz-progress').style.width = `${progressPct}%`;
+
+            const optionsContainer = document.getElementById('quiz-options-container');
+            optionsContainer.innerHTML = '';
+
+            q.options.forEach((opt, idx) => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'quiz-option';
+                if (userAnswers[index] === idx) optDiv.classList.add('selected');
+
+                optDiv.innerHTML = `
+                    <span style="font-weight:bold; color: var(--interactive-tosca);">${String.fromCharCode(65 + idx)}.</span>
+                    <span class="arabic-inline" style="font-size: 1.3rem;">${opt}</span>
+                `;
+                optDiv.onclick = () => selectQuizOption(idx);
+                optionsContainer.appendChild(optDiv);
+            });
+
+            // Reset Feedback UI
+            const fb = document.getElementById('quiz-feedback');
+            fb.className = 'feedback-box';
+            fb.style.display = 'none';
+
+            // Navigation Buttons
+            document.getElementById('btn-prev-q').disabled = (index === 0);
+            
+            if (userAnswers[index] !== null) {
+                showQuizFeedbackForAnswer(index);
+            } else {
+                document.getElementById('btn-submit-q').style.display = 'inline-flex';
+                document.getElementById('btn-next-q').style.display = 'none';
+            }
+        }
+
+        function selectQuizOption(optIdx) {
+            if (userAnswers[currentQuizIdx] !== null) return; // Lock if already answered
+            userAnswers[currentQuizIdx] = optIdx;
+
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((el, idx) => {
+                if (idx === optIdx) el.classList.add('selected');
+                else el.classList.remove('selected');
+            });
+        }
+
+        function submitAnswer() {
+            if (userAnswers[currentQuizIdx] === null) {
+                showAlert("Peringatan", "Silakan pilih salah satu jawaban terlebih dahulu!");
+                return;
+            }
+            showQuizFeedbackForAnswer(currentQuizIdx);
+        }
+
+        function showQuizFeedbackForAnswer(index) {
+            const q = quizData[index];
+            const selected = userAnswers[index];
+            const isCorrect = (selected === q.answer);
+            const fb = document.getElementById('quiz-feedback');
+
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((el, idx) => {
+                if (idx === q.answer) el.classList.add('correct');
+                else if (idx === selected && !isCorrect) el.classList.add('incorrect');
+            });
+
+            if (isCorrect) {
+                fb.className = 'feedback-box correct';
+                fb.innerHTML = `<strong>✨ Jawaban Benar!</strong><br>${q.explanation}`;
+            } else {
+                fb.className = 'feedback-box incorrect';
+                fb.innerHTML = `<strong>❌ Jawaban Belum Tepat.</strong><br>${q.explanation}`;
+            }
+
+            document.getElementById('btn-submit-q').style.display = 'none';
+            document.getElementById('btn-next-q').style.display = 'inline-flex';
+        }
+
+        function nextQuestion() {
+            if (currentQuizIdx < quizData.length - 1) {
+                currentQuizIdx++;
+                loadQuestion(currentQuizIdx);
+            } else {
+                calculateAndShowFinalScore();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuizIdx > 0) {
+                currentQuizIdx--;
+                loadQuestion(currentQuizIdx);
+            }
+        }
+
+        function calculateAndShowFinalScore() {
+            let correctCount = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (ans === quizData[idx].answer) correctCount++;
+            });
+
+            const score = (correctCount / quizData.length) * 100;
+            
+            document.getElementById('quiz-card-body').style.display = 'none';
+            document.getElementById('quiz-score-screen').style.display = 'block';
+            document.getElementById('final-score').innerText = score;
+
+            const msgEl = document.getElementById('score-message');
+            if (score >= 80) {
+                msgEl.innerText = "🌟 الممتاز (Sangat Baik)! Anda telah menguasai Keterampilan Kitabah Ta'aruf!";
+            } else if (score >= 60) {
+                msgEl.innerText = "👍 جيد (Cukup Baik)! Tingkatkan lagi pemahaman Dhamir & Isim Isyarah Anda.";
+            } else {
+                msgEl.innerText = "📚 Perlu Belajar Lagi. Pelajari kembali ringkasan materi di Modul 1.";
+            }
+        }
+
+        function restartQuiz() {
+            currentQuizIdx = 0;
+            userAnswers = new Array(quizData.length).fill(null);
+            document.getElementById('quiz-score-screen').style.display = 'none';
+            document.getElementById('quiz-card-body').style.display = 'block';
+            loadQuestion(0);
+        }
+
+        // INITIALIZATION
+        window.onload = function() {
+            loadSentenceTask(0);
+            loadQuestion(0);
+        };
+    </script>
+</body>
+</html>
